@@ -10,7 +10,7 @@ export const HotelList = ({ hotels, selectedHotelId, onHotelSelect }: HotelListP
   const [distanceSort, setDistanceSort] = useState<DistanceSortOption>('none');
 
   const sortedHotels = useMemo(() => {
-    let result = [...hotels];
+    const result = [...hotels];
     
     if (priceSort === 'price-asc') {
       result.sort((a, b) => a.price - b.price);
@@ -26,13 +26,14 @@ export const HotelList = ({ hotels, selectedHotelId, onHotelSelect }: HotelListP
     return result;
   }, [hotels, priceSort, distanceSort]);
 
-  if (hotels.length === 0) return null;
-
+  
   useEffect(() => {
     setPriceSort('none');
     setDistanceSort('none');
   }, [hotels]);
-
+  
+  if (hotels.length === 0) return null;
+  
   return (
     <div className="hotels-section">
       <div className="hotels-header">
